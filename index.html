@@ -2,187 +2,741 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rossy Black — Luxury Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neo Portfolio — Cinematic Experience</title>
 
-  <!-- Google Fonts -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
+    :root{
+      --bg:#050816;
+      --bg2:#0B1020;
+      --card:rgba(255,255,255,0.06);
+      --border:rgba(255,255,255,0.1);
+
+      --primary:#7C3AED;
+      --primary2:#8B5CF6;
+      --accent:#06B6D4;
+      --accent2:#3B82F6;
+
+      --text:#FFFFFF;
+      --muted:#9CA3AF;
+
+      --glow:0 0 40px rgba(124,58,237,.45);
+    }
+
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
     }
 
-    :root{
-      --bg:#050505;
-      --bg-secondary:#0A0A0A;
-      --card:#111111;
-      --text:#FFFFFF;
-      --muted:#A1A1AA;
-      --purple:#8B5CF6;
-      --pink:#EC4899;
-      --violet:#7C3AED;
+    html{
+      scroll-behavior:smooth;
     }
 
     body{
-      background:var(--bg);
-      color:var(--text);
       font-family:'Inter',sans-serif;
+      background:radial-gradient(circle at top left,#111827 0%,#050816 45%);
+      color:var(--text);
       overflow-x:hidden;
+      min-height:100vh;
     }
 
+    /* Animated Aurora */
+    .aurora{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      overflow:hidden;
+    }
+
+    .aurora::before,
+    .aurora::after{
+      content:"";
+      position:absolute;
+      width:700px;
+      height:700px;
+      border-radius:50%;
+      filter:blur(120px);
+      animation:float 12s infinite alternate ease-in-out;
+    }
+
+    .aurora::before{
+      background:#7C3AED;
+      top:-200px;
+      left:-150px;
+      opacity:.25;
+    }
+
+    .aurora::after{
+      background:#06B6D4;
+      right:-150px;
+      bottom:-200px;
+      opacity:.18;
+      animation-delay:4s;
+    }
+
+    @keyframes float{
+      from{
+        transform:translateY(0px) translateX(0px) scale(1);
+      }
+      to{
+        transform:translateY(80px) translateX(60px) scale(1.15);
+      }
+    }
+
+    /* Noise Overlay */
+    .noise{
+      position:fixed;
+      inset:0;
+      background-image:url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+      opacity:.03;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    /* Navbar */
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      z-index:100;
+      backdrop-filter:blur(18px);
+      background:rgba(5,8,22,.55);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+
+    .nav-inner{
+      max-width:1300px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 30px;
+    }
+
+    .logo{
+      font-size:1.3rem;
+      font-weight:800;
+      letter-spacing:1px;
+      background:linear-gradient(90deg,#fff,#7C3AED,#06B6D4);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+    }
+
+    .nav-links a{
+      color:#d1d5db;
+      text-decoration:none;
+      font-size:.95rem;
+      transition:.3s;
+      position:relative;
+    }
+
+    .nav-links a:hover{
+      color:white;
+    }
+
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      bottom:-6px;
+      left:0;
+      width:0;
+      height:2px;
+      background:linear-gradient(90deg,#7C3AED,#06B6D4);
+      transition:.3s;
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
+    }
+
+    /* Hero */
     .hero{
-      height:100vh;
+      min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
-      flex-direction:column;
+      padding:140px 30px 100px;
       position:relative;
-      background:
-      radial-gradient(circle at top left, rgba(139,92,246,.15), transparent 40%),
-      radial-gradient(circle at bottom right, rgba(236,72,153,.15), transparent 40%),
-      #050505;
     }
 
-    .blur{
-      position:absolute;
-      width:400px;
-      height:400px;
+    .hero-content{
+      max-width:1300px;
+      width:100%;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:80px;
+      align-items:center;
+    }
+
+    .hero-left{
+      z-index:2;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.05);
+      border-radius:999px;
+      backdrop-filter:blur(20px);
+      margin-bottom:28px;
+      box-shadow:var(--glow);
+    }
+
+    .dot{
+      width:10px;
+      height:10px;
       border-radius:50%;
-      filter:blur(120px);
-      opacity:.4;
-      animation:float 8s ease-in-out infinite;
-    }
-
-    .blur.one{
-      background:#8B5CF6;
-      top:-100px;
-      left:-100px;
-    }
-
-    .blur.two{
-      background:#EC4899;
-      bottom:-100px;
-      right:-100px;
-      animation-delay:2s;
+      background:#06B6D4;
+      box-shadow:0 0 20px #06B6D4;
     }
 
     h1{
-      font-size:clamp(4rem,10vw,9rem);
+      font-size:clamp(3rem,8vw,7rem);
+      line-height:.95;
+      font-weight:900;
+      letter-spacing:-3px;
+      margin-bottom:25px;
       font-family:'Space Grotesk',sans-serif;
-      font-weight:700;
-      letter-spacing:-4px;
-      background:linear-gradient(
-      90deg,
-      #ffffff,
-      #c084fc,
-      #ec4899,
-      #ffffff
-      );
+    }
 
+    .gradient-text{
+      background:linear-gradient(90deg,#fff,#A855F7,#06B6D4);
       background-size:300%;
+      animation:gradientMove 8s ease infinite;
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
-
-      animation:gradientMove 8s linear infinite;
-      z-index:2;
     }
 
-    p{
-      margin-top:20px;
+    @keyframes gradientMove{
+      0%{background-position:0%;}
+      50%{background-position:100%;}
+      100%{background-position:0%;}
+    }
+
+    .subtitle{
       color:var(--muted);
-      font-size:1.1rem;
-      letter-spacing:1px;
-      z-index:2;
+      font-size:1.15rem;
+      line-height:1.8;
+      max-width:650px;
+      margin-bottom:40px;
     }
 
-    .buttons{
-      margin-top:40px;
+    .hero-buttons{
       display:flex;
       gap:20px;
-      z-index:2;
+      flex-wrap:wrap;
     }
 
     .btn{
-      padding:14px 32px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.1);
-      background:rgba(255,255,255,.03);
-      backdrop-filter:blur(20px);
-      color:white;
-      text-decoration:none;
-      transition:.4s ease;
+      padding:16px 28px;
+      border-radius:18px;
+      border:none;
+      cursor:pointer;
+      font-size:1rem;
+      font-weight:600;
+      transition:.4s;
       position:relative;
       overflow:hidden;
     }
 
-    .btn:hover{
+    .btn-primary{
+      background:linear-gradient(135deg,#7C3AED,#06B6D4);
+      color:white;
+      box-shadow:0 0 35px rgba(124,58,237,.45);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-4px) scale(1.03);
+      box-shadow:0 0 60px rgba(124,58,237,.65);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+      color:white;
+      backdrop-filter:blur(20px);
+    }
+
+    .btn-secondary:hover{
       transform:translateY(-4px);
+      border-color:#7C3AED;
+    }
+
+    /* 3D Orb */
+    .orb{
+      width:500px;
+      height:500px;
+      margin:auto;
+      border-radius:50%;
+      background:
+      radial-gradient(circle at 30% 30%,rgba(255,255,255,.45),transparent 20%),
+      radial-gradient(circle at 70% 70%,rgba(6,182,212,.6),transparent 25%),
+      linear-gradient(135deg,#7C3AED,#06B6D4);
+      position:relative;
+      animation:rotateOrb 14s linear infinite;
       box-shadow:
-      0 0 20px rgba(139,92,246,.35),
-      0 0 40px rgba(236,72,153,.15);
-      border-color:rgba(236,72,153,.3);
+      0 0 120px rgba(124,58,237,.45),
+      0 0 200px rgba(6,182,212,.25);
+      filter:saturate(140%);
     }
 
-    @keyframes gradientMove{
-      0%{
-        background-position:0%;
+    .orb::before{
+      content:"";
+      position:absolute;
+      inset:20px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.2);
+    }
+
+    @keyframes rotateOrb{
+      from{
+        transform:rotate(0deg);
       }
+      to{
+        transform:rotate(360deg);
+      }
+    }
+
+    /* Sections */
+    section{
+      max-width:1300px;
+      margin:auto;
+      padding:120px 30px;
+    }
+
+    .section-title{
+      font-size:3rem;
+      margin-bottom:20px;
+      font-weight:800;
+      letter-spacing:-2px;
+    }
+
+    .section-subtitle{
+      color:var(--muted);
+      max-width:700px;
+      line-height:1.8;
+      margin-bottom:70px;
+    }
+
+    /* Glass Cards */
+    .glass-card{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:28px;
+      backdrop-filter:blur(24px);
+      transition:.45s;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .glass-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+      135deg,
+      rgba(255,255,255,.08),
+      transparent
+      );
+      opacity:0;
+      transition:.45s;
+    }
+
+    .glass-card:hover::before{
+      opacity:1;
+    }
+
+    .glass-card:hover{
+      transform:translateY(-10px);
+      box-shadow:
+      0 0 40px rgba(124,58,237,.2),
+      0 0 80px rgba(6,182,212,.08);
+    }
+
+    /* Projects */
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:30px;
+    }
+
+    .project-card{
+      padding:28px;
+      min-height:320px;
+    }
+
+    .project-image{
+      width:100%;
+      height:180px;
+      border-radius:20px;
+      background:linear-gradient(135deg,#7C3AED,#06B6D4);
+      margin-bottom:25px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .project-image::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+      linear-gradient(
+      120deg,
+      transparent,
+      rgba(255,255,255,.25),
+      transparent
+      );
+      transform:translateX(-100%);
+      animation:shine 5s infinite;
+    }
+
+    @keyframes shine{
       100%{
-        background-position:300%;
+        transform:translateX(300%);
       }
     }
 
-    @keyframes float{
-      0%,100%{
-        transform:translateY(0px);
-      }
-      50%{
-        transform:translateY(40px);
-      }
+    .project-title{
+      font-size:1.4rem;
+      margin-bottom:14px;
+      font-weight:700;
     }
 
-    @media(max-width:768px){
-      .buttons{
-        flex-direction:column;
-      }
+    .project-desc{
+      color:var(--muted);
+      line-height:1.7;
+      margin-bottom:25px;
+    }
 
-      h1{
+    /* Skills */
+    .skills-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:25px;
+    }
+
+    .skill{
+      padding:30px;
+    }
+
+    .skill h3{
+      margin-bottom:18px;
+    }
+
+    .bar{
+      width:100%;
+      height:10px;
+      background:rgba(255,255,255,.06);
+      border-radius:999px;
+      overflow:hidden;
+    }
+
+    .bar span{
+      display:block;
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,#7C3AED,#06B6D4);
+      box-shadow:0 0 20px rgba(124,58,237,.6);
+    }
+
+    /* Footer */
+    footer{
+      padding:80px 30px;
+      text-align:center;
+      border-top:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+    }
+
+    .socials{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      margin-top:30px;
+    }
+
+    .socials a{
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:white;
+      text-decoration:none;
+      transition:.4s;
+      font-size:1.2rem;
+    }
+
+    .socials a:hover{
+      transform:translateY(-6px);
+      box-shadow:var(--glow);
+      border-color:#7C3AED;
+    }
+
+    /* Responsive */
+    @media(max-width:980px){
+
+      .hero-content{
+        grid-template-columns:1fr;
         text-align:center;
       }
 
-      p{
-        text-align:center;
-        padding:0 20px;
+      .hero-buttons{
+        justify-content:center;
+      }
+
+      .orb{
+        width:340px;
+        height:340px;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      section{
+        padding:90px 22px;
       }
     }
-
   </style>
 </head>
+
 <body>
 
+  <!-- Background -->
+  <div class="aurora"></div>
+  <div class="noise"></div>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-inner">
+      <div class="logo">NEO.PORTFOLIO</div>
+
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Projects</a>
+        <a href="#">Skills</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
   <section class="hero">
 
-    <div class="blur one"></div>
-    <div class="blur two"></div>
+    <div class="hero-content">
 
-    <h1>Rossy Black</h1>
+      <div class="hero-left">
 
-    <p>
-      Luxury Creative Designer • Modern Visual Artist • Premium Portfolio
-    </p>
+        <div class="badge">
+          <div class="dot"></div>
+          Available for new projects
+        </div>
 
-    <div class="buttons">
-      <a href="#" class="btn">View Projects</a>
-      <a href="#" class="btn">Contact Me</a>
+        <h1>
+          Crafting
+          <span class="gradient-text">
+            Cinematic
+          </span>
+          Digital
+          Experiences
+        </h1>
+
+        <p class="subtitle">
+          Senior Frontend Engineer & Creative Developer creating premium futuristic interfaces with world-class interactions, immersive animations, and ultra-modern experiences inspired by Apple, Linear, Stripe and Awwwards.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="btn btn-primary">
+            View Projects
+          </button>
+
+          <button class="btn btn-secondary">
+            Contact Me
+          </button>
+        </div>
+
+      </div>
+
+      <div class="hero-right">
+        <div class="orb"></div>
+      </div>
+
     </div>
 
   </section>
+
+  <!-- About -->
+  <section>
+
+    <h2 class="section-title">
+      About Me
+    </h2>
+
+    <p class="section-subtitle">
+      Blending engineering precision with cinematic visual storytelling to create immersive premium web experiences with futuristic interactions and elite-level UI systems.
+    </p>
+
+    <div class="glass-card" style="padding:40px;">
+      <p style="line-height:2;color:#D1D5DB;font-size:1.05rem;">
+        I specialize in creating high-end digital experiences using modern frontend technologies like Next.js, React, Three.js, GSAP and Framer Motion. Every interface is crafted with pixel-perfect detail, performance-first architecture and cinematic animation systems.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- Skills -->
+  <section>
+
+    <h2 class="section-title">
+      Core Skills
+    </h2>
+
+    <p class="section-subtitle">
+      Advanced frontend engineering with premium visual systems and scalable architecture.
+    </p>
+
+    <div class="skills-grid">
+
+      <div class="glass-card skill">
+        <h3>React / Next.js</h3>
+        <div class="bar">
+          <span style="width:95%"></span>
+        </div>
+      </div>
+
+      <div class="glass-card skill">
+        <h3>Framer Motion</h3>
+        <div class="bar">
+          <span style="width:92%"></span>
+        </div>
+      </div>
+
+      <div class="glass-card skill">
+        <h3>Three.js / R3F</h3>
+        <div class="bar">
+          <span style="width:88%"></span>
+        </div>
+      </div>
+
+      <div class="glass-card skill">
+        <h3>UI/UX Design</h3>
+        <div class="bar">
+          <span style="width:96%"></span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Projects -->
+  <section>
+
+    <h2 class="section-title">
+      Featured Projects
+    </h2>
+
+    <p class="section-subtitle">
+      Premium futuristic interfaces crafted with cinematic interactions and performance-first engineering.
+    </p>
+
+    <div class="projects-grid">
+
+      <div class="glass-card project-card">
+
+        <div class="project-image"></div>
+
+        <h3 class="project-title">
+          Aurora Commerce
+        </h3>
+
+        <p class="project-desc">
+          Luxury eCommerce platform with cinematic transitions, WebGL backgrounds and premium checkout UX.
+        </p>
+
+        <button class="btn btn-secondary">
+          Explore
+        </button>
+
+      </div>
+
+      <div class="glass-card project-card">
+
+        <div class="project-image"></div>
+
+        <h3 class="project-title">
+          Quantum Dashboard
+        </h3>
+
+        <p class="project-desc">
+          Futuristic analytics dashboard inspired by Linear and Vercel with advanced motion systems.
+        </p>
+
+        <button class="btn btn-secondary">
+          Explore
+        </button>
+
+      </div>
+
+      <div class="glass-card project-card">
+
+        <div class="project-image"></div>
+
+        <h3 class="project-title">
+          Neo AI Studio
+        </h3>
+
+        <p class="project-desc">
+          AI creative platform combining immersive 3D visuals with modern SaaS interactions.
+        </p>
+
+        <button class="btn btn-secondary">
+          Explore
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+
+    <h2 class="gradient-text" style="font-size:2rem;">
+      Let's Build Something Legendary
+    </h2>
+
+    <div class="socials">
+      <a href="#">X</a>
+      <a href="#">G</a>
+      <a href="#">L</a>
+      <a href="#">D</a>
+    </div>
+
+    <p style="margin-top:40px;">
+      © 2026 Neo Portfolio — Crafted with cinematic precision.
+    </p>
+
+  </footer>
 
 </body>
 </html>
