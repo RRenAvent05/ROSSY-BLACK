@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rossy Black Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+body{
+font-family:'Inter',sans-serif;
+background:#0a0a0a;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* Background animation */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(120deg,#ff0033,#0066ff,#0a0a0a);
+background-size:300% 300%;
+animation:gradientMove 12s ease infinite;
+z-index:-2;
+opacity:0.25;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.glow{
+text-shadow:0 0 10px #ff0033,0 0 20px #0066ff;
+}
+
+section{
+padding:100px 10%;
+}
+
+/* HERO */
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+.hero h1{
+font-size:70px;
+letter-spacing:3px;
+font-family:'Space Grotesk',sans-serif;
+animation:glitch 2s infinite;
+}
+.hero p{
+margin-top:20px;
+opacity:0.8;
+}
+
+@keyframes glitch{
+0%{transform:translate(0)}
+20%{transform:translate(-2px,2px)}
+40%{transform:translate(2px,-2px)}
+60%{transform:translate(-1px,1px)}
+100%{transform:translate(0)}
+}
+
+.btn{
+margin-top:30px;
+padding:12px 30px;
+border:1px solid #ff0033;
+background:transparent;
+color:#fff;
+cursor:pointer;
+transition:0.3s;
+position:relative;
+overflow:hidden;
+}
+.btn:hover{
+box-shadow:0 0 20px #ff0033,0 0 40px #0066ff;
+transform:scale(1.05);
+}
+
+/* ABOUT */
+.about{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:50px;
+}
+.about img{
+width:300px;
+border-radius:20px;
+filter:grayscale(20%);
+box-shadow:0 0 30px #0066ff;
+}
+.tags span{
+display:inline-block;
+margin:5px;
+padding:8px 12px;
+border:1px solid #0066ff;
+border-radius:20px;
+font-size:12px;
+transition:0.3s;
+}
+.tags span:hover{
+box-shadow:0 0 15px #ff0033;
+transform:scale(1.1);
+}
+
+/* PORTFOLIO */
+.grid{
+column-count:3;
+column-gap:20px;
+}
+.card{
+break-inside:avoid;
+margin-bottom:20px;
+position:relative;
+overflow:hidden;
+border-radius:15px;
+cursor:pointer;
+transition:0.3s;
+}
+.card img{
+width:100%;
+display:block;
+transition:0.3s;
+}
+.card:hover img{
+transform:scale(1.1);
+filter:brightness(1.2);
+}
+.card::after{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(255,0,51,0.2);
+opacity:0;
+transition:0.3s;
+}
+.card:hover::after{
+opacity:1;
+}
+
+/* SERVICES */
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+.service{
+padding:20px;
+border:1px solid #0066ff;
+border-radius:15px;
+transition:0.3s;
+}
+.service:hover{
+box-shadow:0 0 25px #0066ff;
+transform:translateY(-5px);
+}
+
+/* CONTACT */
+form{
+display:flex;
+flex-direction:column;
+gap:15px;
+max-width:500px;
+}
+input,textarea{
+padding:12px;
+background:#111;
+border:1px solid #333;
+color:#fff;
+}
+button.send{
+background:#ff0033;
+border:none;
+padding:12px;
+cursor:pointer;
+transition:0.3s;
+}
+button.send:hover{
+box-shadow:0 0 20px #ff0033;
+}
+
+@media(max-width:768px){
+.about{flex-direction:column;}
+.grid{column-count:1;}
+.hero h1{font-size:40px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+<h1 class="glow">ROSSY BLACK</h1>
+<p>Photographer & Graphic Designer</p>
+<button class="btn">View My Work</button>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+<div>
+<h2 class="glow">About Me</h2>
+<p>I am a freelance designer with a passion for creativity, specializing in modern and sophisticated designs while always striving to deliver the best possible experience for my clients.</p>
+<div class="tags">
+<span>Photoshop</span>
+<span>Illustrator</span>
+<span>Premiere Pro</span>
+<span>UI Design</span>
+</div>
+</div>
+<img src="https://images.unsplash.com/photo-1520975958225-3f61d9f0a8a5" />
+</section>
+
+<!-- PORTFOLIO -->
+<section>
+<h2 class="glow">Portfolio</h2>
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1526481280695-3c687fd5432c"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb"></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1559028012-481c04fa702d"></div>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section>
+<h2 class="glow">Services</h2>
+<div class="services">
+<div class="service">Branding Design</div>
+<div class="service">Poster Design</div>
+<div class="service">Social Media</div>
+<div class="service">Photo Editing</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section>
+<h2 class="glow">Contact</h2>
+<form>
+<input placeholder="Your Name" />
+<input placeholder="Email" />
+<textarea placeholder="Message"></textarea>
+<button class="send">Send</button>
+</form>
+</section>
+
+</body>
+</html>
